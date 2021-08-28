@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-data-logger",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Logs data stored in JSON object into a CSV file with columns extracted from JSON object.",
   "keywords": [ "node-red","data logger","csv logger","logger" ],
   "main": ".\\src\\data-logger.js",

@@ -1,0 +1,94 @@
+<script type="text/javascript">
+    RED.nodes.registerType('data-logger',{
+        category: 'storage',
+        color: '#DEB887',
+        defaults: {
+            name: {value:""},
+			columns: {value:""},
+			parentDir: {value:""},
+			enableBuffering: {value:"0"},
+			bufferSize: {value:10},
+			bufferTimeout: {value:1.0},
+			enableDateColumn: {value:"1"},
+			seperator: {value:","}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name||"data-logger";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="data-logger">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-columns"><i class="icon-tag"></i> Columns</label>
+		<input type="text" id="node-input-columns">
+	</div>
+	<div class="form-row">
+		<label for="node-input-seperator"><i class="icon-tag"></i> Seperator</label>
+		<input type="text" id="node-input-seperator">
+	</div>
+	<div class="form-row">
+		<label for="node-input-enableBuffering"><i class="icon-tag"></i> Enable Buffering</label>
+		<select type="text" id="node-input-enableBuffering">			
+			<option value="0"> No</option>
+			<option value="1"> Yes</option>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-bufferSize"><i class="icon-tag"></i> Buffer Size</label>
+		<input type="number" id="node-input-bufferSize">
+	</div>
+	<div class="form-row">
+		<label for="node-input-bufferTimeout"><i class="icon-tag"></i> Buffering Timeout(s.)</label>
+		<input type="float" id="node-input-bufferTimeout">
+	</div>
+	<div class="form-row">
+		<label for="node-input-enableDateColumn"><i class="icon-tag"></i> Enable Date Column</label>
+		<select type="text" id="node-input-enableDateColumn">			
+			<option value="0"> No</option>
+			<option value="1"> Yes</option>
+		</select>
+	</div>
+	
+</script>
+
+<script type="text/html" data-help-name="data-logger">
+    <p>Logs data stored in JSON object into a CSV file with columns extracted from JSON object. </p>
+
+	<h3>Inputs</h3>
+		<dl class="message-properties">
+			<dt>payload
+				<span class="property-type">JSON</span>
+			</dt>
+			<dd> JSON object to be logged to file. </dd>
+
+			<dt>path
+				<span class="property-type">JSON</span>
+			</dt>
+			<dd> parent directory path where log files to be stored.
+
+			<dt>fileName
+				<span class="property-type">JSON</span>
+			</dt>
+			<dd> name of the log file. </dd>
+			
+		</dl>
+
+	<h3>Details</h3>
+		<p> Data to be logged should be stored in <code>msg.payload</code> as a JSON object. The header row will
+		be populated with the property names of the JSON object on log file creation. The Columns property in node properties
+		can be used as a filter if filled with JSON object's property names as comma separated string. If left empty, all
+		properties of JSON object in <code>msg.payload</code> will be logged to file. </p>
+
+	<h3>Example Flow</h3>
+		<p> [{"id":"88258a55.901628","type":"inject","z":"3c62c132.455f6e","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":440,"y":480,"wires":[["54f959e1.e9fc88"]]},{"id":"54f959e1.e9fc88","type":"function","z":"3c62c132.455f6e","name":"Log Data","func":"var logPath = \".\"\nvar folderName = \"DataLog\\\\TestData\";\nmsg.path = logPath + \"\\\\\" + folderName;\nmsg.fileName = \"testFile\";\n\nvar data = {};\n\nfor (var i = 0; i < 10; i++){\n    data[\"Data\"+i] = i*10;\n}\n\nmsg.payload = data;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":660,"y":480,"wires":[["dbb8420e.ee474"]]},{"id":"dbb8420e.ee474","type":"data-logger","z":"3c62c132.455f6e","name":"","columns":"","parentDir":"","enableBuffering":"0","bufferSize":10,"bufferTimeout":1,"enableDateColumn":"1","seperator":",","x":880,"y":480,"wires":[[]]}] </p>
+
+</script>
+

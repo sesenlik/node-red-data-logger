@@ -88,9 +88,8 @@
 		properties of JSON object in <code>msg.payload</code> will be logged to file. </p>
 
 	<h3>Example Flow</h3>
-		<p> [{"id":"88258a55.901628","type":"inject","z":"3c62c132.455f6e","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":440,"y":480,"wires":[["54f959e1.e9fc88"]]},{"id":"54f959e1.e9fc88","type":"function","z":"3c62c132.455f6e","name":"Log Data","func":"var logPath = \".\"\nvar folderName = \"DataLog\\\\TestData\";\nmsg.path = logPath + \"\\\\\" + folderName;\nmsg.fileName = \"testFile\";\n\nvar data = {};\n\nfor (var i = 0; i < 10; i++){\n    data[\"Data\"+i] = i*10;\n}\n\nmsg.payload = data;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":660,"y":480,"wires":[["dbb8420e.ee474"]]},{"id":"dbb8420e.ee474","type":"data-logger","z":"3c62c132.455f6e","name":"","columns":"","parentDir":"","enableBuffering":"0","bufferSize":10,"bufferTimeout":1,"enableDateColumn":"1","seperator":",","x":880,"y":480,"wires":[[]]}] </p>
+		<p> [{"id":"88258a55.901628","type":"inject","z":"3c62c132.455f6e","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":440,"y":480,"wires":[["54f959e1.e9fc88"]]},{"id":"54f959e1.e9fc88","type":"function","z":"3c62c132.455f6e","name":"Log Data","func":"var logPath = \".\";\nvar folderName = \"DataLog\\\\TestData\";\nmsg.path = logPath + \"\\\\\" + folderName;\nmsg.fileName = \"testFile\";\n\nvar data = {};\n\nfor (var i = 0; i < 10; i++){\n    data[\"Data\"+i] = i*10;\n}\n\nmsg.payload = data;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":660,"y":480,"wires":[["dbb8420e.ee474"]]},{"id":"dbb8420e.ee474","type":"data-logger","z":"3c62c132.455f6e","name":"","columns":"","parentDir":"","enableBuffering":"0","bufferSize":10,"bufferTimeout":1,"enableDateColumn":"1","seperator":",","x":880,"y":480,"wires":[]}] </p>
 
 	<h3>Atolye 4.0</h3>
 		<p> Not free for Presçiler :) </p>
 </script>
-
